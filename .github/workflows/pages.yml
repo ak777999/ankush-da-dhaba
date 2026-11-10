@@ -1,0 +1,89 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Decode binary assets
+        run: |
+          if [ -f encoded-assets.tar.b64 ]; then
+            base64 -d encoded-assets.tar.b64 | tar -xf -
+          fi
+
+      - name: Enable GitHub Pages from Actions
+        continue-on-error: true
+        run: |
+          echo "POST /pages"
+          curl -sS -o /tmp/pages-post.json -w "HTTP %{http_code}\n" -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/pages \
+            -d '{"build_type":"workflow"}' || true
+          cat /tmp/pages-post.json || true
+          echo
+          echo "PUT /pages"
+          curl -sS -o /tmp/pages-put.json -w "HTTP %{http_code}\n" -X PUT \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/pages \
+            -d '{"build_type":"workflow"}' || true
+          cat /tmp/pages-put.json || true
+          echo
+
+      - name: Commit decoded binaries once
+        run: |
+          if [ ! -f assets/food/samosa.webp ]; then
+            echo "Decoded assets missing, skip commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/food assets/fonts
+          if git diff --cached --quiet; then
+            echo "Binaries already committed"
+          else
+            git commit -m "Add decoded binary food and font assets"
+            git push
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Stage site files
+        run: |
+          mkdir -p /tmp/site/assets
+          cp index.html /tmp/site/
+          cp -f README.txt /tmp/site/ || true
+          touch /tmp/site/.nojekyll
+          cp -a assets/. /tmp/site/assets/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: /tmp/site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
