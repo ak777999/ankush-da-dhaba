@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ankush Da Dhaba · Apni Thali Banao</title>
+<meta name="description" content="Ankush Da Dhaba — apni Punjabi thali khud banao. Roti, dal, sabzi, crunchy aur meetha chuno.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="bg-dots"></div>
+  <div class="bg-sun"></div>
+  <div class="bg-shape s1"></div>
+  <div class="bg-shape s2"></div>
+  <div class="bg-shape s3"></div>
+  <div class="bg-word w1">ਢਾਬਾ</div>
+  <div class="bg-word w2">ढाबा</div>
+  <div class="bg-word w3">HORN<br>OK<br>PLEASE</div>
+</div>
+
+<svg class="toran" id="toran" preserveAspectRatio="none" aria-hidden="true"></svg>
+<header class="top">
+  <div class="logo">
+    <div class="logo-kicker"><span>★</span> ANKUSH DA <span>★</span></div>
+    <div class="logo-main">Dhaba</div>
+    <div class="logo-sub"><span class="gur">ਅੰਕੁਸ਼ ਦਾ ਢਾਬਾ</span><i></i><span class="deva">अंकुश दा ढाबा</span></div>
+  </div>
+  <div class="tag">
+    <b>APNI THALI KHUD BANAO</b>
+    <span>G.T. Road, Ludhiana · Pure Desi Ghee · 24×7 Tandoor</span>
+  </div>
+  <div class="top-actions">
+    <ol class="steps" id="steps"></ol>
+    <button class="btn-reset" id="resetBtn" type="button"><span>↺</span> Nayi Thali</button>
+  </div>
+</header>
+
+<main class="stage">
+  <section class="col col-dial" aria-label="Menu dial">
+    <div class="dial-wrap">
+      <div class="dial-pointer" aria-hidden="true"></div>
+      <div class="dial" id="dial">
+        <div class="dial-ring" id="dialRing"></div>
+        <div class="dial-face">
+          <div class="dial-items" id="dialItems"></div>
+          <div class="dial-head" id="dialHead">
+            <small id="dialStep">STEP 1 / 5</small>
+            <h2 id="dialTitle">ROTI YA CHAWAL?</h2>
+            <span class="gur" id="dialGur">ਰੋਟੀ ਜਾਂ ਚੌਲ?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="hint" id="hint">Kuch bhi chuno — seedha thali mein udd ke jayega ✨</p>
+  </section>
+
+  <section class="col col-thali" aria-label="Your thali">
+    <div class="thali-wrap" id="thaliWrap">
+      <div class="thali-shadow"></div>
+      <div class="thali" id="thali">
+        <div class="thali-rim"></div>
+        <div class="thali-sheen"></div>
+        <div class="slots" id="slots"></div>
+        <div class="garnish" aria-hidden="true">
+          <span class="g-onion"></span><span class="g-onion o2"></span>
+          <span class="g-lemon"></span><span class="g-chilli"></span>
+        </div>
+        <div class="lid" id="lid" aria-hidden="true">
+          <div class="lid-knob"></div>
+          <svg class="lid-seal" viewBox="0 0 200 200">
+            <defs><path id="sealPath" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/></defs>
+            <circle cx="100" cy="100" r="92" fill="#E63027"/>
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#FFC21A" stroke-width="3" stroke-dasharray="2 6"/>
+            <text font-size="17" fill="#FFF5DC" letter-spacing="3.2"><textPath href="#sealPath">ANKUSH DA DHABA ★ GARMA GARAM ★ </textPath></text>
+            <circle cx="100" cy="100" r="46" fill="#FFC21A" stroke="#1A1414" stroke-width="3"/>
+            <text x="100" y="98" text-anchor="middle" font-size="22" class="seal-gur" fill="#1A1414">ਢਾਬਾ</text>
+            <text x="100" y="120" text-anchor="middle" font-size="11" fill="#1A1414" letter-spacing="2">PACKED</text>
+          </svg>
+        </div>
+      </div>
+      <svg class="spoon" viewBox="0 0 80 300" aria-hidden="true">
+        <defs>
+          <linearGradient id="steel" x1="0" x2="1">
+            <stop offset="0" stop-color="#8d949c"/><stop offset=".35" stop-color="#f4f6f8"/>
+            <stop offset=".55" stop-color="#c3c9cf"/><stop offset="1" stop-color="#6f767e"/>
+          </linearGradient>
+          <radialGradient id="bowl" cx=".4" cy=".35" r=".7">
+            <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c9ced4"/><stop offset="1" stop-color="#7c838b"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="40" cy="52" rx="32" ry="46" fill="url(#bowl)" stroke="#5d646b" stroke-width="2"/>
+        <ellipse cx="33" cy="40" rx="9" ry="16" fill="#fff" opacity=".7"/>
+        <path d="M34 96 L46 96 L50 290 Q40 298 30 290 Z" fill="url(#steel)" stroke="#5d646b" stroke-width="2"/>
+      </svg>
+      <div class="thali-badge" id="thaliBadge">0 / 5</div>
+    </div>
+  </section>
+
+  <section class="col col-receipt" aria-label="Receipt">
+    <div class="receipt" id="receipt">
+      <div class="r-head">
+        <div class="r-title">ANKUSH DA DHABA</div>
+        <div class="r-gur">ਅੰਕੁਸ਼ ਦਾ ਢਾਬਾ</div>
+        <div class="r-addr">G.T. ROAD, LUDHIANA, PB<br>PH: 98XXX-XXXXX</div>
+        <div class="r-meta"><span id="rOrder">ORDER #----</span><span id="rDate"></span></div>
+      </div>
+      <div class="r-rule"></div>
+      <ul class="r-lines" id="rLines"><li class="r-empty">— thali khaali hai —</li></ul>
+      <div class="r-rule"></div>
+      <div class="r-sum">
+        <div><span>SUBTOTAL</span><span id="rSub">₹0</span></div>
+        <div><span>GST 5%</span><span id="rGst">₹0</span></div>
+        <div class="r-total"><span>TOTAL</span><span id="rTotal">₹0</span></div>
+      </div>
+      <div class="r-ready" id="rReady">
+        <div class="r-ready-label"><i></i> READY TO PACK</div>
+        <button class="btn-yellow" id="packBtn" type="button">PACK KARO!</button>
+      </div>
+      <div class="r-thanks">DHANNVAAD JI · PHIR AAYO</div>
+      <div class="barcode" id="barcode"></div>
+      <div class="r-code" id="rCode">0000 0000 0000</div>
+      <div class="r-stamp" id="rStamp">ORDER<br>LAG GAYA</div>
+    </div>
+  </section>
+</main>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+<div class="checkout-veil" id="veil"></div>
+<aside class="checkout" id="checkout" aria-hidden="true" aria-labelledby="coTitle">
+  <button class="co-close" id="coClose" type="button" aria-label="Band karo">✕</button>
+  <form id="coForm" class="co-form" novalidate>
+    <div class="co-kicker">STEP 6 · DELIVERY</div>
+    <h2 id="coTitle">KIDHAR BHEJNA HAI?</h2>
+    <p class="co-gur">ਕਿੱਥੇ ਭੇਜਣਾ ਹੈ?</p>
+    <label>Name<input name="name" id="fName" autocomplete="name" placeholder="Jaise: Amit Kashyap" required></label>
+    <label>Delivery Address<textarea name="address" id="fAddr" rows="3" autocomplete="street-address" placeholder="Ghar no., gali, mohalla, Ludhiana" required></textarea></label>
+    <label>Instructions <em>(optional)</em><input name="notes" id="fNotes" placeholder="Extra makhan, mirchi ghatt…"></label>
+    <div class="co-total"><span>Total (COD)</span><b id="coTotal">₹0</b></div>
+    <button class="btn-yellow big" type="submit">ORDER KARO!</button>
+    <p class="co-note">Demo hai ji — koi payment nahi, koi asli delivery nahi.</p>
+  </form>
+  <div class="co-done" id="coDone">
+    <div class="co-fire">🔥</div>
+    <h2>Order lag gaya!</h2>
+    <p class="co-big">Garma garam aa raha hai 🔥</p>
+    <p id="coMsg">Bas 30–35 minute, ji.</p>
+    <button class="btn-yellow big" id="againBtn" type="button">NAYI THALI BANAO</button>
+  </div>
+</aside>
+
+<div id="fx" class="fx" aria-hidden="true"></div>
+<script src="assets/app.js"></script>
+</body>
+</html>
